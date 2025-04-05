@@ -1,0 +1,63 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - bin/bundle
+    - vendor/bundle/**/*
+Metrics/BlockLength:
+  Exclude:
+    - config/routes.rb
+    - spec/**/*.rb
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false
+
+Layout/LineLength:
+  Exclude:
+    - spec/**/*.rb
+
+Style/Documentation:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 10
+
+RSpec/ExampleLength:
+  Max: 30
+
+Metrics/ParameterLists:
+  Max: 10
+
+Metrics/MethodLength:
+  Max: 50  # Увеличиваем максимально допустимую длину метода
+
+Metrics/AbcSize:
+  Max: 50  # Увеличиваем максимально допустимую сложность метода
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+inherit_mode:
+  merge:
+    - Exclude
