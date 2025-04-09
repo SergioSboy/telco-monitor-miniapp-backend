@@ -12,7 +12,7 @@ module Api
         Rails.logger.info "Пользователь #{user} существует, проверяем доступ к ресурсам"
         return render json: { message: 'Ошибка доступа. Попробуйте позже.' }, status: :forbidden if check_access(user)
       else
-        Rails.logger.info 'Пользователь заходит первый раз'
+        Rails.logger.info "Пользователь #{user} заходит первый раз, создаем нового пользователя"
         user = User.create(parsed_data)
       end
 
