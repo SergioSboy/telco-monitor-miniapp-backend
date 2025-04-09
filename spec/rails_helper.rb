@@ -61,6 +61,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.include AuthenticationHelper
   config.include FactoryBot::Syntax::Methods
   config.include ActiveSupport::Testing::TimeHelpers
   # You can uncomment this line to turn off ActiveRecord support entirely.
