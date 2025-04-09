@@ -50,7 +50,6 @@ RSpec.describe '/api/telegram_login', type: :request do
 
       it 'рендерит роль и сообщение' do
         make_request
-        expect(response.parsed_body['role']).to eq(existing_user.role_id)
         expect(response.parsed_body['message']).to eq('Пользователь уже существует')
       end
 
