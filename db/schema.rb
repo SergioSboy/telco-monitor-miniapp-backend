@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_08_172937) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_09_200734) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
+
+  create_table "connection_tests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.float "ping"
+    t.float "download_speed"
+    t.float "upload_speed"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_connection_tests_on_user_id"
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "telegram_id", null: false
@@ -25,4 +37,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_08_172937) do
     t.datetime "updated_at", null: false
     t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
   end
+
+  add_foreign_key "connection_tests", "users"
 end
