@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     get 'health', to: 'health#show'
 
     resources :connection_tests, only: [:create]
+    resources :complaints, only: [:create]
   end
 end
