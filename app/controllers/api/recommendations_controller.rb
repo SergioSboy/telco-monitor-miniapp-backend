@@ -25,5 +25,30 @@ module Api
 
       render json: result
     end
+
+    def map
+      lat = params[:lat].to_f
+      lng = params[:lng].to_f
+      radius = params[:radius].to_f || 1.5
+
+      recommendations = Recommendation.where(
+        latitude: (lat - radius)..(lat + radius),
+        longitude: (lng - radius)..(lng + radius)
+      )
+
+      render json: recommendations
+    end
+
+    def feedback
+      recommendation = Recommendation.find(params[:id])
+      type = params[:vote]
+
+      if %w[up down].include?(type)
+        recommendation.rate!(type.to_sym)
+        render json: { success: true }
+      else
+        render json: { error: 'Invalid vote type' }, status: :unprocessable_entity
+      end
+    end
   end
 end
