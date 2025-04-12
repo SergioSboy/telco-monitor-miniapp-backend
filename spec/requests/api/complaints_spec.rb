@@ -24,12 +24,11 @@ describe 'api/complaints', type: :request do
     authenticate(user)
   end
 
-  context  "GET" do
+  context 'GET' do
     let!(:http_method) { :get }
-    let!(:complaint_1) { create(:complaint, user: user, problem_type: 'нет сигнала') }
-    let!(:complaint_2) { create(:complaint, user: user, problem_type: 'медленный интернет') }
+    let!(:complaint1) { create(:complaint, user: user, problem_type: 'нет сигнала') }
+    let!(:complaint2) { create(:complaint, user: user, problem_type: 'медленный интернет') }
     let!(:other_user_complaint) { create(:complaint) }
-
 
     it 'returns only current_user complaints' do
       make_request
@@ -47,10 +46,9 @@ describe 'api/complaints', type: :request do
       body = response.parsed_body.first
       expect(body.keys).to include('id', 'problem_type', 'comment', 'status', 'ticket_number', 'created_at')
     end
-
   end
 
-  context  "POST" do
+  context 'POST' do
     context 'valid params' do
       let(:params) { valid_params }
 
@@ -80,5 +78,4 @@ describe 'api/complaints', type: :request do
       end
     end
   end
-
 end

@@ -12,13 +12,13 @@ describe 'api/connection_tests', type: :request do
     authenticate(user)
   end
 
-  context "GET" do
+  context 'GET' do
     let(:http_method) { :get }
-    let!(:test_1) do
+    let!(:test1) do
       create(:connection_test, user: user, ping: 34.5, download_speed: 12.0)
     end
 
-    let!(:test_2) do
+    let!(:test2) do
       create(:connection_test, user: user, ping: 45.3, download_speed: 22.5)
     end
 
