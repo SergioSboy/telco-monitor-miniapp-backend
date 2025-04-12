@@ -45,8 +45,8 @@ describe 'api/recommendations', type: :request do
         expect(response).to have_http_status(:ok)
         body = response.parsed_body
         expect(body).to be_an(Array)
-        expect(body.any? { |r| r['text'].include?('задержка') }).to be_truthy
-        expect(body.any? { |r| r['text'].include?('скорость загрузки') }).to be_truthy
+        expect(body).to(be_any { |r| r['text'].include?('задержка') })
+        expect(body).to(be_any { |r| r['text'].include?('скорость загрузки') })
       end
     end
 
