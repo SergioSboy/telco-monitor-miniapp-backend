@@ -3,8 +3,8 @@
 module Api
   class ComplaintsController < ConnectionTestsController
     def create
-      current_user.complaints.create!(complaint_params)
-      render json: { message: 'ok' }, status: :ok
+      @complaint = current_user.complaints.create!(complaint_params)
+      render json: { message: 'ok', ticket_number: @complaint.ticket_number }, status: :ok
     rescue StandardError => e
       render json: { message: e.message }, status: :unprocessable_entity
     end
