@@ -2,6 +2,10 @@
 
 module Api
   class ConnectionTestsController < ApplicationController
+    def index
+      @tests = current_user.connection_tests.order(created_at: :desc)
+    end
+
     def create
       current_user.connection_tests.create!(connection_tests_params)
 

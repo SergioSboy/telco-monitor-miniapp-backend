@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     post 'telegram_login', to: 'login#telegram_login'
     get 'health', to: 'health#show'
 
-    resources :connection_tests, only: [:create]
-    resources :complaints, only: [:create]
+    resources :connection_tests, only: %i[create index]
+    resources :complaints, only: %i[create index]
     resources :recommendations, only: [:index] do
       member do
         post :feedback
