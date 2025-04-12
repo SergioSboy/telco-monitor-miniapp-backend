@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :complaint do
-    user { nil }
+    association :user
     problem_type { 'MyString' }
     comment { 'MyText' }
     latitude { 1.5 }

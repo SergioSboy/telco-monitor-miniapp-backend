@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :connection_test do
-    user { nil }
+    association :user
     ping { 1.5 }
     download_speed { 1.5 }
     upload_speed { 1.5 }

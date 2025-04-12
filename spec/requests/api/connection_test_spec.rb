@@ -12,6 +12,36 @@ describe 'api/connection_tests', type: :request do
     authenticate(user)
   end
 
+  context "GET" do
+    let(:http_method) { :get }
+    let!(:test_1) do
+      create(:connection_test, user: user, ping: 34.5, download_speed: 12.0)
+    end
+
+    let!(:test_2) do
+      create(:connection_test, user: user, ping: 45.3, download_speed: 22.5)
+    end
+
+    let!(:other_test) { create(:connection_test) }
+
+    it 'returns only current_user connection tests' do
+      make_request
+
+      expect(response).to have_http_status(:ok)
+      body = response.parsed_body
+
+      expect(body.size).to eq(2)
+      expect(body.map { |t| t['ping'] }).to contain_exactly(34.5, 45.3)
+    end
+
+    it 'includes required fields' do
+      make_request
+
+      body = response.parsed_body.first
+      expect(body.keys).to include('id', 'ping', 'download_speed', 'upload_speed', 'latitude', 'longitude', 'created_at')
+    end
+  end
+
   context 'POST' do
     let(:http_method) { :post }
 
